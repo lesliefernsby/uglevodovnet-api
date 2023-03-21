@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: uglevodov-net-rest-api
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:postgresql://jelani.db.elephantsql.com/ejwvhapx
+    username: ejwvhapx
+    password: GK-KlJ6SRirMaw_BZ22D69Aw2nwB-pgO
+    driver-class-name: org.postgresql.Driver
+  r2dbc:
+    url: r2dbc:postgresql://jelani.db.elephantsql.com/ejwvhapx
+    username: ejwvhapx
+    password: GK-KlJ6SRirMaw_BZ22D69Aw2nwB-pgO
+    #TODO! change connections 10-50 later
+    pool:
+      initial-size: 5
+      max-size: 5
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  security:
+    jwt:
+      secret: ${random.uuid}
+      accessTokenExpiration: 3600
+      refreshTokenExpiration: 86400
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
